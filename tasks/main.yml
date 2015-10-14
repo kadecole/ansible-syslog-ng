@@ -15,7 +15,7 @@
   - start syslog-ng
 
 - name: install syslog-ng
-  pkg: name=syslog-ng state=present
+  pkgng: name=syslog-ng state=present
   when: ansible_os_family == 'FreeBSD'
   notify:
   - start syslog-ng
