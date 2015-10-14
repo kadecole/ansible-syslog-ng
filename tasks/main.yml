@@ -21,7 +21,7 @@
   - start syslog-ng
 
 - name: determine syslog-ng's config version
-  shell: 'syslog-ng --version | head -n 1 | grep -o -P "[0-9]\.[0-9][0-9]?"'
+  shell: "syslog-ng --version | head -n 1 | awk '{ print $2}' | cut -c 1-3"
   register: determined_config_version
   when: syslog_ng_config_version_auto_detect == true
 
