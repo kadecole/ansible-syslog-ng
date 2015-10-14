@@ -4,6 +4,19 @@
 
 - name: install syslog-ng
   apt: name=syslog-ng-core state=present
+  when: ansible_os_family == 'Debian'
+  notify:
+  - start syslog-ng
+
+- name: install syslog-ng
+  yum: name=syslog-ng state=present
+  when: ansible_os_family == 'RedHat'
+  notify:
+  - start syslog-ng
+
+- name: install syslog-ng
+  pkg: name=syslog-ng state=present
+  when: ansible_os_family == 'FreeBSD'
   notify:
   - start syslog-ng
 
