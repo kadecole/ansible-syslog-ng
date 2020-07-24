@@ -20,9 +20,15 @@
   notify:
   - start syslog-ng
 
+<<<<<<< HEAD
 - name: determine syslog-ng's config version
   shell: "syslog-ng --version | head -n 1 | awk '{ print $2}' | cut -c 1-3"
+=======
+- name: determine syslog-ng config version
+  shell: 'syslog-ng --version | head -n 1 | grep -o -P "[0-9]\.[0-9][0-9]?"'
+>>>>>>> ihrwein/master
   register: determined_config_version
+  changed_when: false
   when: syslog_ng_config_version_auto_detect == true
 
 - name: set syslog_ng_config_version variable
@@ -50,7 +56,5 @@
     dest="{{syslog_ng_config_file}}"
     owner="{{syslog_ng_user}}"
     group="{{syslog_ng_group}}"
-    validate='syslog-ng --syntax-only --cfgfile %s'
   notify:
   - reload syslog-ng
-
